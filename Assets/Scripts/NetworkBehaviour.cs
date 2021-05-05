@@ -136,8 +136,8 @@ public class NetworkBehaviour : MonoBehaviour
         try
         {
             double [] coordinates = new double[2];
-            coordinates[0] = GetRandomNumber(0.0f, 50.0f);
-            coordinates[1] = GetRandomNumber(0.0f, 50.0f);
+            coordinates[0] = GetRandomNumber(-90.0f, 90.0f);
+            coordinates[1] = GetRandomNumber(-90.0f, 90.0f);
 
             // Construct the HttpClient and Uri. This endpoint is for test purposes only.
             HttpClient httpClient = new HttpClient();
@@ -159,8 +159,8 @@ public class NetworkBehaviour : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Write out any exceptions.
-            Debug.WriteLine(ex);
+            // Write out any exceptions.
+            System.Diagnostics.Debug.WriteLine(ex);
         }
     }
 
