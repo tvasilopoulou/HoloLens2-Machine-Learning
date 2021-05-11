@@ -35,7 +35,7 @@ public class NetworkModel
 {
     public string OnnxFileName = "model.onnx";
     public string LabelsFileName = "Labels.json";
-    public float DetectionThreshold = 0.5f;
+    public float DetectionThreshold = 0.3f;
 
     private List<string> _labels = new List<string>();
     private NetworkResult _networkResult;
@@ -134,3 +134,4 @@ public class NetworkModel
     }
 #endif
 }
+

@@ -119,7 +119,7 @@ public class NetworkBehaviour : MonoBehaviour
                     $"Probability: {Math.Round(result.PredictionProbability, 3) * 100}% " +
                     $"Inference time: {result.PredictionTime} ms";
                     
-                    await TryPostJsonAsync(result.PredictionLabel);
+                    await TryPostJsonAsync(result.PredictionLabel, (Math.Round(result.PredictionProbability, 3) * 100).ToString());
             }
             , false);
 
@@ -131,7 +131,7 @@ public class NetworkBehaviour : MonoBehaviour
     }
 #endif
 
-    private async Task TryPostJsonAsync(string predLabel)
+    private async Task TryPostJsonAsync(string predLabel, string precision)
     {
         try
         {
@@ -147,7 +147,9 @@ public class NetworkBehaviour : MonoBehaviour
             else predLabel = predLabel.Substring(0, predLabel.Length - 1);
 
             // Construct the JSON to post.
-            string json = "{\"records\":[{\"value\":{\"coordinates\":[" + string.Join(",", coordinates) + "], \"prediction\": " + predLabel + " }}]}";
+            string json = "{\"records\":[{\"value\":{\"coordinates\":[" + string.Join(",", coordinates) + "], \"prediction\": " + predLabel 
+                + ", \"probability\": " + precision + "% }}]}";
+            
             var content = new System.Net.Http.StringContent(json, UnicodeEncoding.UTF8, "application/vnd.kafka.json.v2+json");
 
             // Post the JSON and wait for a response.
